@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rating{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script
+            src="https://code.jquery.com/jquery-3.7.0.min.js"
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+{% endblock %}
+
+{% block body %}
+<label for="date">Дата рейтинга:</label>
+<input type="date" id="date" name="date" value="{{ date }}" onchange="request()"/>
+<div class="example-wrapper">
+    <table id="example" class="display" style="width:100%">
+        <thead>
+        <tr>
+            <th>Позиция</th>
+            <th>Название фильма</th>
+            <th>Год выпуска</th>
+            <th>Рейтинг</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for rating in ratings %}
+        <tr>
+            <td>{{ rating.position }}</td>
+            <td>{{ rating.movie.title }}</td>
+            <td>{{ rating.date |date('d-m-Y') }}</td>
+            <td>{{ rating.value }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
